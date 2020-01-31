@@ -1,0 +1,18 @@
+//设置画笔样式
+public void setPaintStyle(){
+   mPaint = new Paint();//创建画笔
+   // 创建线条画笔
+   mPaint.setAntiAlias(true);
+   //防止画图边缘锯齿
+   mPaint.setDither(true);
+   //设置画笔为空心
+   mPaint.setStyle(Paint.Style.STROKE);
+   //画笔接合点类型
+   mPaint.setStrokeJoin(Paint.Join.ROUND);
+   //画笔笔刷类型
+   mPaint.setStrokeCap(Paint.Cap.ROUND);
+   //设置画笔宽
+   mPaint.setStrokeWidth(currentSize);
+   //设置画笔颜色
+   mPaint.setColor(currentColor);
+}

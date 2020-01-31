@@ -1,0 +1,21 @@
+//处理界面手势事件
+@Override
+public boolean onTouchEvent(MotionEvent event) {
+   float x = event.getX();										//手指在屏幕上x坐标
+   float y = event.getY();										//手指在屏幕上y坐标
+   switch (event.getAction()) {
+      case MotionEvent.ACTION_DOWN:								//手指在屏幕按下
+         touch_start(x, y);										//设置开始坐标
+         invalidate(); 											//刷新
+         break;
+      case MotionEvent.ACTION_MOVE:								//手指在屏幕移动
+         touch_move(x, y);											//设置移动坐标
+         invalidate();												//刷新
+         break;
+      case MotionEvent.ACTION_UP:									//手指在屏幕离开
+         touch_up();												//手指抬起
+         invalidate();												//刷新
+         break;
+   }
+   return true;
+}

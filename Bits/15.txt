@@ -1,0 +1,25 @@
+ //插入日记信息到数据库
+public void insert_db(String title, String text, String time,
+                      String datatype, String datatime, String locktype, String lock) {
+    if (text.isEmpty()) {											//判断是否有内容
+        Toast.makeText(context, "内容不能为空", Toast.LENGTH_LONG).show();
+    } else {
+        db.execSQL("insert into notes(title,context,time,datatype,datatime,locktype,lock)
+values('"
+                + title											//日记标题
+                + "','"
+                + text											     //日记内容
+                + "','"
+                + time												//日记添加时间
+                + "','"
+                + datatype											//日记是否设置了时间提醒
+                + "','"
+                + datatime											//日记提醒时间
+                + "','"
+                + locktype											//日记是否设置了日记锁
+                + "','"
+                + lock												//日记锁密码
+                + "');");
+        Toast.makeText(context, "插入成功", Toast.LENGTH_LONG).show();
+    }
+}

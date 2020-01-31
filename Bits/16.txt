@@ -1,0 +1,6 @@
+private GridView bottomMenu;
+// 底部按钮菜单按钮图片集合
+private int[] bottomItems = {R.drawable.tabbar_handwrite,
+        R.drawable.tabbar_paint, R.drawable.tabbar_microphone,
+        R.drawable.tabbar_photo, R.drawable.tabbar_camera,
+        R.drawable.tabbar_appendix};

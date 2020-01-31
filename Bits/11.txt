@@ -1,0 +1,3 @@
+// 创建或打开数据库
+dop.create_db();
+Cursor cursor = dop.query_db(startData, endData); 						// 时间段查询

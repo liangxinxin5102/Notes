@@ -1,0 +1,43 @@
+// 显示记事列表
+private void showNotesList() {
+   // 打开数据库
+   dop.create_db();
+   Cursor cursor = dop.query_db(keword);							//模糊查询
+   if (cursor.getCount() > 0) {
+      List<SQLBean> list = new ArrayList<SQLBean>();				//实例化数据列表
+      while (cursor.moveToNext()) {								// 光标移动成功
+         SQLBean bean = new SQLBean();								//创建数据库实体类
+         //保存日记信息id到实体类
+         bean.set_id("" + cursor.getInt(cursor.getColumnIndex("_id")));
+         //保存日记内容到实体类
+         bean.setContext(cursor.getString(cursor
+               .getColumnIndex("context")));
+         //保存日记标题到实体类
+         bean.setTitle(cursor.getString(cursor.getColumnIndex("title")));
+         //保存日记记录时间到实体类
+         bean.setTime(cursor.getString(cursor.getColumnIndex("time")));
+         //保存日记是否设置提醒时间到实体类
+         bean.setDatatype(cursor.getString(cursor
+               .getColumnIndex("datatype")));
+         //保存日记提醒时间到实体类
+         bean.setDatatime(cursor.getString(cursor
+               .getColumnIndex("datatime")));
+         //保存日记是否设置了日记锁到实体类
+         bean.setLocktype(cursor.getString(cursor
+               .getColumnIndex("locktype")));
+         //保存日记锁密码到实体类
+         bean.setLock(cursor.getString(cursor.getColumnIndex("lock")));
+         //把保存日记信息实体类保存到日记信息集合里
+         list.add(bean);
+      }
+      //装载日记信息到首页
+      MainAdapter adapter = new MainAdapter(list, this);
+      //日记列表设置日记信息适配器
+      lv_notes.setAdapter(adapter);
+   }else{
+      Toast.makeText(SearchActivity.this, "暂无记事！",
+            Toast.LENGTH_LONG).show();
+   }
+   //关闭数据库
+   dop.close_db();
+}

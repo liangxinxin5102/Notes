@@ -1,0 +1,2 @@
+// Îª²Ëµ¥ÉèÖÃ¼àÌıÆ÷
+bottomMenu.setOnItemClickListener(new MenuClickEvent());

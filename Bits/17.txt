@@ -1,0 +1,19 @@
+// 配置菜单
+private void initBottomMenu() {
+    //菜单集合
+    ArrayList<Map<String, Object>> menus = new ArrayList<Map<String, Object>>();
+    for (int i = 0; i < bottomItems.length; i++) {				//循环菜单集合
+        Map<String, Object> item = new HashMap<String, Object>();
+        item.put("image", bottomItems[i]);						//循环图片集合添加到菜单中
+        menus.add(item);										//添加图片菜单到底部菜单
+    }
+    //菜单长度
+    bottomMenu.setNumColumns(bottomItems.length);
+    //底部菜单
+    bottomMenu.setSelector(R.drawable.bottom_item);
+    //实例化底部菜单适配器
+    SimpleAdapter mAdapter = new SimpleAdapter(AddActivity.this, menus,
+            R.layout.item_button, new String[]{"image"},
+            new int[]{R.id.item_image});
+    bottomMenu.setAdapter(mAdapter);							//为底部菜单添加适配器
+}

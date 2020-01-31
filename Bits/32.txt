@@ -1,0 +1,40 @@
+//数据回调方法
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (resultCode == RESULT_OK) {
+        // 取得数据
+        Uri uri = data.getData();
+        //实例化数据表
+        ContentResolver cr = AddActivity.this.getContentResolver();
+        //用于储存图片,选择后转换成Bitmap类型
+        Bitmap bitmap = null;
+        //接收返回信息
+        Bundle extras = null;
+        // 如果是选择照片
+        if (requestCode == 1) {
+            // 取得选择照片的路径
+            String[] proj = {MediaStore.Images.Media.DATA};
+            //用于查询指定图片位置
+            Cursor actualimagecursor = managedQuery(uri, proj, null, null,
+                    null);
+            //读取媒体数据库
+            int actual_image_column_index = actualimagecursor
+                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            //移动数据到第一个
+            actualimagecursor.moveToFirst();
+            //图片路径
+            String path = actualimagecursor
+                    .getString(actual_image_column_index);
+            try {
+                // 将对象存入Bitmap中
+                bitmap = BitmapFactory
+                        .decodeStream(cr.openInputStream(uri));
+            } catch (FileNotFoundException e) {
+                
+                e.printStackTrace();
+            }
+            // 插入图片
+            InsertBitmap(bitmap, 480, path);
+        }
+    }

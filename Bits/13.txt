@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/edit_blue" >
+    <ScrollView
+        android:id="@+id/sclv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rl_yuyin"
+        android:layout_below="@+id/rl" >
+        <com.mingrisoft.notes.view.LineEditText
+            android:id="@+id/et_note"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:background="#00000000"
+            android:fadingEdge="vertical"
+            android:gravity="top"
+            android:hint="ÇëÊäÈëÄÚÈÝ"
+            android:inputType="textMultiLine"
+            android:lineSpacingExtra="10dp"
+            android:scrollbars="vertical"
+            android:textSize="20sp" />
+    </ScrollView>
+    <RelativeLayout
+        android:id="@+id/rl_yuyin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/datarl"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:padding="5dp"
+        android:visibility="visible" >
+        <ImageButton
+            android:id="@+id/ib_lk"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/un_locky"
+            android:onClick="onLOCK" />
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/fenxiang"
+            android:onClick="onFX" />
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottomMenu"
+        android:src="@drawable/line" />
+    <GridView
+        android:id="@+id/bottomMenu"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/navigationbar_bg"
+        android:horizontalSpacing="10dp"
+        android:numColumns="auto_fit" >
+    </GridView>
+</RelativeLayout>

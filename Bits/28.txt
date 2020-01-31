@@ -1,0 +1,7 @@
+//设置画笔颜色
+public void selectHandWriteColor(int which){
+   //设置画笔颜色
+   currentColor = paintColor[which];
+   //设置画笔样式
+   setPaintStyle();
+}

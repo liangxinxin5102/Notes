@@ -1,0 +1,17 @@
+//取消密码
+private void inputunlockDialog() {
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);			//创建弹出框
+    builder.setTitle("是否取消密码")
+            .setNegativeButton("取消", null);//在弹窗上设置标题设置取消按钮
+    builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+
+        public void onClick(DialogInterface dialog, int which) {			//设置确认按钮
+            locktype = "0";											//设置没有设置密码
+            lock = "0";												//设置密码
+            ib_lk.setBackgroundResource(R.drawable.un_locky);
+            Toast.makeText(AddActivity.this, "密码已取消",
+                    Toast.LENGTH_LONG).show();
+        }
+    });
+    builder.show();													//弹出取消密码弹窗
+}

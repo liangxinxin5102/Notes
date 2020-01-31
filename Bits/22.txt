@@ -1,0 +1,21 @@
+// 分享功能
+public void onFX(View v) {
+    Bitmap c = getBitmapByView(sclv);								//获取到图片
+    try {
+        saveMyBitmap("notesimge", c);								//保存图片
+    } catch (IOException e) {	
+       
+        e.printStackTrace();
+    }
+    String imagePath = Environment.getExternalStorageDirectory()
+            + File.separator + "notesimge.jpg";						//图片路径
+    // 由文件得到文件路径
+    Uri imageUri = Uri.fromFile(new File(imagePath));
+    Log.d("share", "uri:" + imageUri);								//打印图片路径
+    Intent shareIntent = new Intent();								//创建意图
+    shareIntent.setAction(Intent.ACTION_SEND);						//过滤条件允许分享的
+    shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);			//分享图片
+    shareIntent.setType("image/*");								//设置类型
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);					//默认跳转类型
+    startActivity(Intent.createChooser(shareIntent, "分享到："));
+}

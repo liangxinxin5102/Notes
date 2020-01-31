@@ -1,0 +1,27 @@
+//设置密码弹窗
+private void inputlockDialog() {
+    final EditText inputServer = new EditText(this);				//创建EditText输入框
+    inputServer.setInputType(InputType.TYPE_CLASS_TEXT
+            | InputType.TYPE_TEXT_VARIATION_PASSWORD);				//设置输入框类型
+    inputServer.setFocusable(true);								//获取焦点
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);		//创建弹出框
+    builder.setTitle("设置密码").setView(inputServer)
+            .setNegativeButton("取消", null);					//在弹窗上设置标题添加输入框
+    builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+
+        public void onClick(DialogInterface dialog, int which) {		//设置确认按钮
+            String inputName = inputServer.getText().toString();
+            if ("".equals(inputName)) {							//判断输入框内容是否为空
+                Toast.makeText(AddActivity.this, "密码不能为空 请重新输入！",
+                        Toast.LENGTH_LONG).show();
+            } else {												//输入框内容不为空　
+                lock = inputName;									//密码
+                locktype = "1";										//添加了密码锁
+                ib_lk.setBackgroundResource(R.drawable.locky);		//设置添加锁图案
+                Toast.makeText(AddActivity.this, "密码设置成功！",
+                        Toast.LENGTH_LONG).show();
+            }
+        }
+    });
+    builder.show();//弹出设置密码弹窗
+}

@@ -1,0 +1,9 @@
+//设置画笔的大小
+public void selectHandWritetSize(int which){
+   //设置size值
+ int size =Integer.parseInt(this.getResources().getStringArray(R.array.paintsize1)[which]);
+   //设置画笔大小
+   currentSize = size;
+   //设置画笔样式
+   setPaintStyle();
+}

@@ -1,0 +1,6 @@
+// select * from 表名 where name like '%abc%'//模糊查询
+public Cursor query_db(String keword){
+   Cursor cursor = db.rawQuery("select * from notes where context like '%"
+         + keword + "%';", null);
+   return cursor;
+}

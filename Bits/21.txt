@@ -1,0 +1,23 @@
+//保存图片
+public void saveMyBitmap(String bitName, Bitmap mBitmap) throws IOException {
+    File f = new File(Environment.getExternalStorageDirectory()
+            + File.separator + "notesimge.jpg");					//初始化文件
+    f.createNewFile();											//创建图片文件
+    FileOutputStream fOut = null;									//创建文件流
+    try {
+        fOut = new FileOutputStream(f);							//实例化文件流
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    }
+    mBitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);			//图片保存到文件中
+    try {
+        fOut.flush();												//文件写入操作结束
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    try {
+        fOut.close();												//关闭文件流
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}

@@ -1,0 +1,14 @@
+// 搜索功能
+public void onSearch(View v) {
+   //获取搜索关键字
+   String ek = et_keyword.getText().toString();
+   if ("".equals(ek)) {										//判断搜索关键词是否为空
+      Toast.makeText(MainActivity.this, "请输入关键字！", Toast.LENGTH_LONG)
+            .show();
+   } else {													//搜索不为空
+      //进入搜索结果页
+      Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+      intent.putExtra("keword", ek);							//传递关键字
+      startActivity(intent);									//开始跳转
+   }
+}

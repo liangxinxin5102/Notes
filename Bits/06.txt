@@ -1,0 +1,54 @@
+
+ // 简单列表对话框，用于选择操作
+public void simpleList(final int item_id, final String locktype,
+                  final String lock) {
+   //实例化AlertDialog
+   AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this,
+         R.style.custom_dialog);
+   //设置弹窗标题
+   alertDialogBuilder.setTitle("选择操作");
+   //设置弹窗图片
+   alertDialogBuilder.setIcon(R.mipmap.ic_launcher);
+   //设置弹窗选项内容
+   alertDialogBuilder.setItems(R.array.itemOperation,
+         new android.content.DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+               switch (which) {
+                  // 编辑
+                  case 0:
+                     if ("0".equals(locktype)) {			//判断是否添加了密码锁0没有添加
+                        Intent intent = new Intent(MainActivity.this,
+                              AddActivity.class);						//跳转到添加日记页
+                        intent.putExtra("editModel", "update");		//传递编辑信息
+                        intent.putExtra("noteId", item_id);			//传递id信息
+                        startActivity(intent);						//开始跳转
+                     } else {										//有密码锁
+                        // 弹出输入密码框
+                        inputTitleDialog(lock, 0, item_id);
+                     }
+                     break;
+                  // 删除
+                  case 1:
+                     if ("0".equals(locktype)) {// 判断是否是加密日记密码锁0没有添加
+                        dop.create_db();								// 打开数据库
+                        dop.delete_db(item_id); 						// 删除数据库
+                        dop.close_db();								// 关闭数据库
+                        // 刷新列表显示
+                        lv_notes.invalidate();
+                        showNotesList();
+                     } else {										//有密码锁
+                        // 弹出输入密码框
+                        inputTitleDialog(lock, 1, item_id);
+                        // 刷新列表显示
+                        lv_notes.invalidate();
+                        //显示日记列表信息
+                        showNotesList();
+                     }
+                     break;
+               }
+            }
+         });
+   alertDialogBuilder.create();									//创造弹窗
+   alertDialogBuilder.show();										//显示弹窗
+}

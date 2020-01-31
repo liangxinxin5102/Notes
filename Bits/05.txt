@@ -1,0 +1,22 @@
+// 记事列表长按监听器
+class ItemLongClickEvent implements OnItemLongClickListener {
+   @Override
+   public boolean onItemLongClick(AdapterView<?> parent, View view,
+                           int position, long id) {
+      //初始化日记id保存控件
+      tv_note_id = (TextView) view.findViewById(R.id.tv_note_id);
+      //初始化是否添加日记锁保存控件
+      tv_locktype = (TextView) view.findViewById(R.id.tv_locktype);
+      //初始化日记锁密码保存信息
+      tv_lock = (TextView) view.findViewById(R.id.tv_lock);
+      //获取控件上是否设置日记锁信息
+      String locktype = tv_locktype.getText().toString();
+      //获取控件上日记密码信息
+      String lock = tv_lock.getText().toString();
+      //获取控件上id信息转换成int类型
+      int item_id = Integer.parseInt(tv_note_id.getText().toString());
+      //弹出选择操作框方法
+      simpleList(item_id, locktype, lock);
+      return true;
+   }
+}

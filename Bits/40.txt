@@ -1,0 +1,24 @@
+// 提醒设置
+private void setReminder() {
+    DateTimePickerDialog d;
+    if ("0".equals(datatime)) {					//判断是否设置过事件0没有设置过提醒时间
+//设置自定义时间弹出显示系统时间
+        d = new DateTimePickerDialog(this, System.currentTimeMillis());
+    } else {
+//设置自定义时间弹出显示设置过的时间
+        d = new DateTimePickerDialog(this, getdaytime(datatime));
+    }
+    d.setOnDateTimeSetListener(new OnDateTimeSetListener() {
+        public void OnDateTimeSet(AlertDialog dialog, long date) {
+            // 取得当前时间
+            SimpleDateFormat formatter = new SimpleDateFormat(
+                    "yyyy-MM-dd HH:mm");								//设计格式
+            //以自己设置的时间格式显示时间 date为当前选择的时间
+            datatime = formatter.format(date);
+            datatype = "1";
+            datarl.setVisibility(View.VISIBLE);
+            datatv.setText("提醒时间：" + datatime);
+        }
+    });
+    d.show();
+}

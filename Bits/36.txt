@@ -1,0 +1,14 @@
+//创建视频/音频类
+mRecorder = new MediaRecorder();
+mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);				//设置语音录制
+mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP); 		//设置保存格式
+mRecorder.setOutputFile(FilePath);									//设置保存路径
+mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);			//设置编码格式
+try {
+   mRecorder.prepare();   												//准备录制
+} catch (IllegalStateException e) {
+      e.printStackTrace();
+} catch (IOException e) {
+     e.printStackTrace();
+}
+mRecorder.start();													//开始录制

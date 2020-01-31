@@ -1,0 +1,8 @@
+// 添加日记锁 取消日记锁
+public void onLOCK(View v) {
+    if ("0".equals(locktype)) {									//判断是否设置了密码
+        inputlockDialog();											//弹出设置密码弹窗
+    } else {
+        inputunlockDialog();										//弹出取消密码弹窗
+    }
+}

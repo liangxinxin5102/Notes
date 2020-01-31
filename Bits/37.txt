@@ -1,0 +1,13 @@
+// 将最终的录音文件的路径返回到新增日记页面
+if (FilePath == null) {
+   Toast.makeText(ActivityRecord.this, "没有录音可以保存，请先录音",
+         Toast.LENGTH_LONG).show();
+} else {
+   Intent intent = getIntent();   								//创建意图
+   Bundle b = new Bundle();   									//信息的传递
+   b.putString("audio", FilePath);  							//存入文件路径
+   b.putString("time", tv_recordTime.getText().toString());   	//存入音频时长
+   intent.putExtras(b);   										//开始传递
+   setResult(RESULT_OK, intent);  			 					//传递给调整到当前页面的类
+}
+ActivityRecord.this.finish();									//关闭当前类

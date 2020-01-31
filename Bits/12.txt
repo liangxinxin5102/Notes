@@ -1,0 +1,6 @@
+// select * from 表名 where 时间 between '开始时间' and '结束时间'			//时间段查询
+public Cursor query_db(String starttime, String endtime) {
+   Cursor cursor = db.rawQuery("select * from notes where time >='"+starttime+"'and time<='"
+         + endtime + "';", null);
+   return cursor;
+}

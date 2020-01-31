@@ -1,0 +1,2 @@
+intent = getIntent();												//获取当前传递对象
+keword = intent.getStringExtra("keword");							//获取传递参数

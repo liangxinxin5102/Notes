@@ -1,0 +1,40 @@
+// 设置按钮监听器
+class ClickEvent implements OnClickListener {
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.bt_save:
+                // 取得EditText中的内容
+                context = et_Notes.getText().toString();
+                if (context.isEmpty()) {
+                    Toast.makeText(AddActivity.this, "记事为空!", Toast.LENGTH_LONG)
+                            .show();
+                } else {
+                    // 取得当前时间
+                    SimpleDateFormat formatter = new SimpleDateFormat(
+                            "yyyy-MM-dd HH:mm");
+                    Date curDate = new Date(System.currentTimeMillis());// 获取当前时间
+                    time = formatter.format(curDate);
+                    // 截取EditText中的前一部分作为标题，用于显示在主页列表中
+                    title = getTitle(context);
+                    // 打开数据库
+                    dop.create_db();
+                    // 判断是更新还是新增记事
+                    if (editModel.equals("newAdd")) {
+                        // 将记事插入到数据库中
+                        dop.insert_db(title, context, time, datatype, datatime,
+                                locktype, lock);
+                    }
+                    // 如果是编辑则更新记事即可
+                    else if (editModel.equals("update")) {
+                        dop.update_db(title, context, time, datatype, datatime,
+                                locktype, lock, item_Id);
+                    }
+                    dop.close_db();
+                    // 结束当前activity
+                    AddActivity.this.finish();
+                }
+                break;
+        }
+    }
+}

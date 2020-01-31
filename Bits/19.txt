@@ -1,0 +1,48 @@
+// 设置菜单项监听器
+class MenuClickEvent implements OnItemClickListener {
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position,
+                            long id) {
+        Intent intent;
+        switch (position) {
+            // 手写
+            case 0:
+                intent = new Intent(AddActivity.this, HandWriteActivity.class);
+                startActivityForResult(intent, 5);
+                break;
+            // 绘图
+            case 1:
+                intent = new Intent(AddActivity.this, PaintActivity.class);
+                startActivityForResult(intent, 3);
+                break;
+            // 语音
+            case 2:
+                intent = new Intent(AddActivity.this, ActivityRecord.class);
+                startActivityForResult(intent, 4);
+                break;
+            // 照片
+            case 3:
+                // 添加图片的主要代码
+                intent = new Intent();
+                // 设定类型为image
+                intent.setType("image/*");
+                // 设置action
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                // 选中相片后返回本Activity
+                startActivityForResult(intent, 1);
+                break;
+            // 拍照
+            case 4:
+                // 调用系统拍照界面
+                intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+                // 区分选择相片
+                startActivityForResult(intent, 2);
+                break;
+            // 提醒设置
+            case 5:
+                setReminder();
+                break;
+        }
+    }
+}

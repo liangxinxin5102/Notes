@@ -1,0 +1,18 @@
+// 数据库的打开或创建
+public void create_db() {
+    // 创建或打开数据库mynotes.db3
+    db = SQLiteDatabase.openOrCreateDatabase(context.getFilesDir()
+            .toString() + "/mynotes.db3", null);
+    if (db == null) {										//判断数据库是否创建成功
+        Toast.makeText(context, "数据库创建不成功", Toast.LENGTH_LONG).show();
+    }
+    // 创建表,名称为notes,主键为_id
+    db.execSQL("create table if not exists notes(_id integer primary key autoincrement,"
+            + "title text,"								//标题title
+            + "context text,"								//内容context
+            + "time varchar(20),"							//创建时间time
+            + "datatype text,"								//是否设置了提醒时间datatype
+            + "datatime varchar(20),"						//提醒时间datatime
+            + "locktype text,"								//是否添加了锁locktype
+            + "lock text" + ")");							//锁密码lock
+}

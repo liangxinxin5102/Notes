@@ -1,0 +1,17 @@
+// 获得系统当前时间，并以该时间作为文件名
+SimpleDateFormat formatter = new SimpleDateFormat(
+      "yyyyMMddHHmmss");
+Date curDate = new Date(System.currentTimeMillis());				// 获取当前时间
+String str = formatter.format(curDate);							//以String形式保存日期
+str = str + "record.amr";											//文件名
+File dir = new File("/sdcard/notes/");								//创建文件夹
+File file = new File("/sdcard/notes/", str);						//创建文件
+if (!dir.exists()) {												//判断文件夹是否创建成功
+   dir.mkdir();													//创建文件夹
+} else {
+   if (file.exists()) {											//判断文件是否创建
+      file.delete();												//删除文件
+   }
+}
+//文件路径
+FilePath = dir.getPath() + "/" + str;

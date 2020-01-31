@@ -1,0 +1,66 @@
+//数据回调方法
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (resultCode == RESULT_OK) {
+        // 取得数据
+        Uri uri = data.getData();
+        //实例化数据表
+        ContentResolver cr = AddActivity.this.getContentResolver();
+        //图片用于储存选择后转换成Bitmap类型
+        Bitmap bitmap = null;
+        //接收返回信息
+        Bundle extras = null;
+        // 如果是选择照片
+        if (requestCode == 2){
+            try {
+                if (uri != null){
+                 // 根据图片路径，获取Bitmap类型图片的静态方法
+                 bitmap = MediaStore.Images.Media.getBitmap(cr, uri);
+                // 这里是有些拍照后的图片是直接存放到Bundle中的所以我们可以从这里面获取Bitmap图片
+                }else {
+                    //得到返回数据
+                    extras = data.getExtras();
+                    //获取图片
+                    bitmap = extras.getParcelable("data");
+                }
+                // 将拍的照片存入指定的文件夹下
+                // 获得系统当前时间，并以该时间作为文件名
+                SimpleDateFormat formatter = new SimpleDateFormat(
+                        "yyyyMMddHHmmss");
+                // 获取当前时间
+                Date curDate = new Date(System.currentTimeMillis());
+                // 当前时间保存成String类型
+                String str = formatter.format(curDate);
+                //用于记录图片路径
+                String paintPath = "";
+                //图片路径
+                str = str + "paint.png";
+                //新建文件夹
+                File dir = new File("/sdcard/notes/");
+                //新建文件
+                File file = new File("/sdcard/notes/", str);
+                if (!dir.exists()) {							// 判断文件夹创建是否成功
+                    dir.mkdir();								// 创建文件夹
+                } else {
+                    if (file.exists()) {							// 判断文件是否创建
+                        file.delete();							// 删除文件
+                    }
+                }
+                //新建文件流
+                FileOutputStream fos = new FileOutputStream(file);
+                // 将 bitmap 压缩成其他格式的图片数据
+                bitmap.compress(CompressFormat.PNG, 100, fos);
+                fos.flush();									//结束流传输
+                fos.close();									//关闭流
+                //图片路径
+                String path = "/sdcard/notes/" + str;
+                //插入图片
+                InsertBitmap(bitmap, 480, path);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                
+                e.printStackTrace();
+            }
+        }

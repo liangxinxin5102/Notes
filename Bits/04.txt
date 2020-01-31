@@ -1,0 +1,6 @@
+@Override
+protected void onStart() {
+   super.onStart();
+     // 为记事列表添加长按事件
+   lv_notes.setOnItemLongClickListener(new ItemLongClickEvent());
+}

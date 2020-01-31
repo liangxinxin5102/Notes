@@ -1,0 +1,17 @@
+//截取scrollview的屏幕
+public static Bitmap getBitmapByView(ScrollView scrollView) {
+    int h = 0;												//设置高度0
+    Bitmap bitmap = null;										//设置空的图片
+    // 获取scrollview实际高度
+    for (int i = 0; i < scrollView.getChildCount(); i++) {
+        h += scrollView.getChildAt(i).getHeight();				//计算scrollView实际高度
+        scrollView.getChildAt(i).setBackgroundColor(
+                Color.parseColor("#FFFFFF"));					//设置scrollView背景颜色
+    }
+    // 创建scrollView大小的bitmap
+    bitmap = Bitmap.createBitmap(scrollView.getWidth(), h,
+            Bitmap.Config.RGB_565);
+    final Canvas canvas = new Canvas(bitmap);					//绘制图片
+    scrollView.draw(canvas);									//绘制scrollView
+    return bitmap;											//返回图片
+}

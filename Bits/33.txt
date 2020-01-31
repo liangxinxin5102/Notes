@@ -1,0 +1,5 @@
+// 调用系统拍照界面
+intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+// 区分选择相片
+startActivityForResult(intent, 2);
